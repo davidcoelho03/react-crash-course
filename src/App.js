@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Header from './components/layout/header';
+import AddTodo from './components/AddTodo';
 import Todos from './components/Todos';
 
 import './App.css';
@@ -39,7 +41,16 @@ class App extends Component {
     this.setState({todos: this.state.todos.filter(todo => todo.id !== id)});
   }
 
-  
+  addTodo = (title) => {
+    const newTodo = {
+      id: new Date().getUTCMilliseconds(),
+      title,
+      completed: false
+    };
+
+    this.setState({ todos: [...this.state.todos, newTodo] });
+  }
+
 
   render() {
     // console.log(...this.state.todos); // access the state with todos
@@ -47,7 +58,11 @@ class App extends Component {
     return (
       // can't use atribute class. It's className instead
       <div className="App">
-        <Todos todos={this.state.todos} markComplete={this.markComplete}  removeTodo = {this.removeTodo} />
+        <div className="container">
+          <Header />
+          <AddTodo addTodo={this.addTodo} />
+          <Todos todos={this.state.todos} markComplete={this.markComplete}  removeTodo = {this.removeTodo} />
+        </div>
       </div>
     );
   }
