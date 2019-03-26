@@ -62,4 +62,10 @@ const btnStyle = {
   float: 'right'
 }
 
+// good practise - implement PropTypes
+TodoItem.propTypes = {
+  markComplete: PropTypes.func.isRequired,
+  removeTodo: PropTypes.func.isRequired
+}
+
 export default TodoItem;
